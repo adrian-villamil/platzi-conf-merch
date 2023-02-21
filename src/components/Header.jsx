@@ -6,7 +6,6 @@ import AppContext from "../context/AppContext";
 const Header = () => {
   const { state } = useContext(AppContext);
   const { cart } = state;
-  console.log(cart.length);
 
   return (
     <div className="Header">
