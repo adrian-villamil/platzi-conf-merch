@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useContext, useRef } from "react";
 import { Link } from "react-router-dom";
 import '../styles/components/Information.css';
+import AppContext from '../context/AppContext';
+import { v4 as uuidv4 } from "uuid";
 
 const Information = () => {
+  const { state, addToBuyer } = useContext(AppContext);
+  const form = useRef(null);
+
+  const { cart } = state;
+
+  const handleSubmit = () => {
+    const formData = new FormData(form.current);
+    const buyer = {
+      'name': formData.get('name'),
+      'email': formData.get('email'),
+      'address': formData.get('address'),
+      'apto': formData.get('apto'),
+      'city': formData.get('city'),
+      'country': formData.get('country'),
+      'state': formData.get('state'),
+      'cp': formData.get('cp'),
+      'phone': formData.get('phone'),
+    };
+    addToBuyer(buyer);
+  };
+
   return (
     <div className="Information">
       <div className="Information-content">
@@ -10,7 +33,7 @@ const Information = () => {
           <h2>Información de contacto:</h2>
         </div>
         <div className="Information-form">
-          <form action="">
+          <form ref={form}>
             <input type="text" placeholder="Nombre completo" name="name" />
             <input type="text" placeholder="Correo Electrónico" name="email" />
             <input type="text" placeholder="Dirección" name="address" />
@@ -29,20 +52,20 @@ const Information = () => {
             </Link>
           </div>
           <div className="Information-next">
-            <Link to='/checkout/payment'>
-              Pagar
-            </Link>
+            <button type="button" onClick={handleSubmit}>Pagar</button>
           </div>
         </div>
       </div>
       <div className="Information-sidebar">
         <h3>Pedido:</h3>
-        <div className="Information-item">
-          <div className="Information-element">
-            <h4>Item Name</h4>
-            <span>$10</span>
+        {cart.map(item => (
+          <div className="Information-item" key={uuidv4()}>
+            <div className="Information-element">
+              <h4>{item.title}</h4>
+              <span>${item.price}</span>
+            </div>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );
