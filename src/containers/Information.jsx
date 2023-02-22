@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../styles/components/Information.css';
 import AppContext from '../context/AppContext';
 import { v4 as uuidv4 } from "uuid";
@@ -7,8 +7,8 @@ import { v4 as uuidv4 } from "uuid";
 const Information = () => {
   const { state, addToBuyer } = useContext(AppContext);
   const form = useRef(null);
-
   const { cart } = state;
+  const navigate = useNavigate();
 
   const handleSubmit = () => {
     const formData = new FormData(form.current);
@@ -24,6 +24,7 @@ const Information = () => {
       'phone': formData.get('phone'),
     };
     addToBuyer(buyer);
+    navigate('/checkout/payment');
   };
 
   return (
