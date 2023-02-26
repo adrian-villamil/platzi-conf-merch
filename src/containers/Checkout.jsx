@@ -4,6 +4,7 @@ import '../styles/components/Checkout.css';
 import AppContext from '../context/AppContext';
 import { v4 as uuidv4 } from 'uuid';
 import CheckoutItem from "../components/CheckoutItem";
+import { totalAmmount } from "../utils/totalAmmount";
 
 const Checkout = () => {
   const { state, removeFromCart } = useContext(AppContext);
@@ -14,9 +15,7 @@ const Checkout = () => {
   };
 
   const handleSumTotal = () => {
-    const reducer = (accumulator, currentValue) => accumulator + currentValue.price;
-    const sum = cart.reduce(reducer, 0);
-    return sum;
+    return totalAmmount(cart);
   };
 
   return (
