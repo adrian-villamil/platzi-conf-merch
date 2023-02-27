@@ -12,7 +12,7 @@ const Payment = () => {
   const navigate = useNavigate();
 
   const paypalOptions = {
-    "client-id": "ASBjlq16lUJQsFwyXeULVA19wPGZ97QKpjUGk986fVT62zQHzmGJWBDcRavKdZ-C77_KLDaC10Syh5oa"
+    "client-id": process.env.REACT_APP_CLIENT_ID
   };
 
   const buttonStyles = {
