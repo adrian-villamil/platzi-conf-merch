@@ -1,1 +1,7 @@
-{}
+{
+  "projects": {
+    "platzi-store-merch": "platzi-store-merch-dac0b"
+  },
+  "targets": {},
+  "etags": {}
+}
