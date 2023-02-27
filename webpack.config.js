@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const DotenvWepbackPlugin = require('dotenv-webpack');
 
 module.exports = {
   entry: './src/index.js',
@@ -39,6 +40,10 @@ module.exports = {
           'css-loader',
         ],
       },
+      {
+        test: /\.(png|svg|jp(e*)g|gif)$/,
+        type: 'asset/resource'
+      }
     ],
   },
   plugins: [
@@ -49,6 +54,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'assets/[name].css',
     }),
+    new DotenvWepbackPlugin(),
   ],
   devServer: {
     static: path.join(__dirname, 'dist'),
