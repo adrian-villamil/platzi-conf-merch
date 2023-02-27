@@ -5,6 +5,7 @@ import AppContext from '../context/AppContext';
 import { v4 as uuidv4 } from 'uuid';
 import CheckoutItem from "../components/CheckoutItem";
 import { totalAmmount } from "../utils/totalAmmount";
+import { Helmet } from "react-helmet";
 
 const Checkout = () => {
   const { state, removeFromCart } = useContext(AppContext);
@@ -19,7 +20,13 @@ const Checkout = () => {
   };
 
   return (
-    <div className="Checkout">
+    <>
+      <Helmet>
+        <title>
+          Lista de pedidos - Platzi Conf Merch
+        </title>
+      </Helmet>
+      <div className="Checkout">
       <div className="Checkout-content">
         <h3>{cart.length > 0 ? 'Lista de pedidos:' : 'Sin pedidos...'}</h3>
         {cart.map(item => (
@@ -35,6 +42,7 @@ const Checkout = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 
